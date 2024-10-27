@@ -8,6 +8,9 @@ pub enum EOLError {
 
     #[error("Time is yet to be out of bounds {out_of_bounds_limit}")]
     TimeInBoundsError { out_of_bounds_limit: Timestamp },
+
+    #[error("invalid request}")]
+    InvalidRequest {},
 }
 
 pub type EOLResult<T> = Result<T, EOLError>;

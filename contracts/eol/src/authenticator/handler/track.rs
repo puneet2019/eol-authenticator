@@ -21,6 +21,10 @@ pub fn track(
     let params = validate_and_parse_params(authenticator_params)?;
     let key = (&account, authenticator_id.as_str());
 
+    // TODO: only write if original use account is using the smart account
+    // orelse nominee will be blocked for another x duration
+    // unless nominee executes the tx that authenticates another account for full access in the tx.
+
     let mut eol = EOLS.load(deps.storage, key)?;
     let eol2 = eol.update(env.block.time);
     EOLS.save(deps.storage, key, &eol2)?;

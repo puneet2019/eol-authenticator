@@ -9,7 +9,7 @@ pub enum EOLError {
     #[error("Time is yet to be out of bounds {out_of_bounds_limit}")]
     TimeInBoundsError { out_of_bounds_limit: Timestamp },
 
-    #[error("invalid request}")]
+    #[error("invalid request")]
     InvalidRequest {},
 }
 

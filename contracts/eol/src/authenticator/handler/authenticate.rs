@@ -1,11 +1,8 @@
-use cosmwasm_std::{DepsMut, Env, Response, StdError, Timestamp};
-use cw_authenticator::AuthenticationRequest;
-use osmosis_std::types::ibc::core::channel::v1::acknowledgement::Response::Result;
+use super::validate_and_parse_params;
 use crate::state::EOLS;
 use crate::ContractError;
-use crate::eol::error::EOLError;
-use super::validate_and_parse_params;
-
+use cosmwasm_std::{DepsMut, Env, Response, StdError};
+use cw_authenticator::AuthenticationRequest;
 
 pub fn authenticate(
     deps: DepsMut,
@@ -18,13 +15,11 @@ pub fn authenticate(
     // assume auth_request.signature_data.signers outputs just one signer and the
     // signer is the one actually signing the tx and not the account the tx is signed for
     if auth_request.signature_data.signers.len() != 1 {
-        return Err(StdError::generic_err(
-            "expecting only one signer",
-        ))
+        return Err(ContractError::Unauthorized {});
     }
     // handles the case when account is being used by the original user
-    if auth_request.signature_data.signers.contains(&auth_request.account){
-        return Ok(Response::new().add_attribute("action", "authenticate"))
+    if auth_request.signature_data.signers.contains(&auth_request.account) {
+        return Ok(Response::new().add_attribute("action", "authenticate"));
     }
 
     let key = (

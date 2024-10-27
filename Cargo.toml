@@ -1,7 +1,6 @@
 [workspace]
 members = [
   'contracts/*',
-  "sl-util",
 ]
 resolver = "2"
 

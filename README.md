@@ -4,9 +4,9 @@ Spend limit Authenticator is a CosmWasm [authenticator](https://github.com/osmos
 
 ## Overview
 
-Each spend limit authenticator must have [SpendLimitParams](./contracts/spend-limit/src/spend_limit/params.rs) as authenticator params. This is act as a parameter for each specific instance of the authenticator and stored in the module state. It will be passed along to to its hooks and can be used to enforce the spend limit.
+Each spend limit authenticator must have [SpendLimitParams](contracts/eol/src/spend_limit/params.rs) as authenticator params. This is act as a parameter for each specific instance of the authenticator and stored in the module state. It will be passed along to to its hooks and can be used to enforce the spend limit.
 
-Other global configurations and states are stored in the [contract state](./contracts/spend-limit/src/state.rs).
+Other global configurations and states are stored in the [contract state](contracts/eol/src/state.rs).
 
 For each transaction, the authenticator will check if the transaction amount is within the spend limit. If the transaction amount is greater than the spend limit, the transaction will be rejected. Here is the breakdown:
 
@@ -50,5 +50,5 @@ The typescript client is located in the [`ts/sdk`](./ts/sdk) directory. It is us
 To update the client when msgs definition changes, run:
 
 ```sh
-beaker wasm ts-gen spend-limit
+beaker wasm ts-gen eol
 ```
